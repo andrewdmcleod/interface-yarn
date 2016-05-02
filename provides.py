@@ -32,11 +32,12 @@ class MapredProvides(RelationBase):
 
     def send_spec(self, spec):
         for conv in self.conversations():
-            conv.set_remote('spec', json.dumps(spec))
+            conv.set_remote('spec', json.dumps(spec, sort_keys=True))
 
     def send_resourcemanagers(self, resourcemanagers):
         for conv in self.conversations():
-            conv.set_remote('resourcemanagers', json.dumps(resourcemanagers))
+            conv.set_remote('resourcemanagers',
+                            json.dumps(sorted(resourcemanagers)))
 
     def send_ports(self, port, hs_http, hs_ipc):
         for conv in self.conversations():
@@ -52,4 +53,4 @@ class MapredProvides(RelationBase):
 
     def send_hosts_map(self, hosts_map):
         for conv in self.conversations():
-            conv.set_remote('etc_hosts', json.dumps(hosts_map))
+            conv.set_remote('etc_hosts', json.dumps(hosts_map, sort_keys=True))

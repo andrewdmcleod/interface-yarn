@@ -31,6 +31,7 @@ class MapredRequires(RelationBase):
         """
         conv = self.conversation()
         conv.set_local('spec', json.dumps(spec))
+        self.changed()  # check for spec mismatch
 
     def local_spec(self):
         conv = self.conversation()
